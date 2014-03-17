@@ -1,0 +1,4 @@
+terminal_admin:
+    resource: "@TerminalAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
