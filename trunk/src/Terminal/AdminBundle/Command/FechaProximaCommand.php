@@ -38,6 +38,7 @@ class FechaProximaCommand extends ContainerAwareCommand
             $cant = $sxd->getFrecuencia();            
             $fecha_actualizada = $fecha->add(new \DateInterval('P'.$cant.'D'))->format('Y-m-d H:i');
             $sxd->setFechaProxima(new \DateTime($fecha_actualizada));
+            $sxd->setEstado('espera');                                                
             //$em->persist($sxd);            
             $output->writeln('SERVICIO: '.$sxd->getNombre().' actualizado a fecha proxima '.$sxd->getFechaProxima()->format('d/m/Y H:i'));                
         }                    
@@ -49,11 +50,13 @@ class FechaProximaCommand extends ContainerAwareCommand
         $output->writeln('SERVICIOS A ACTUALIZAR X DIA DE SEMANA: '.count($servicios_dias_semana));
         $fecha_actual = new \DateTime();
         $fecha_format = $fecha_actual->format('Y-m-d');
-        $hace_una_hora = $fecha_actual->sub(new \DateInterval('PT1H'));
+        
+        $hace_dos_horas = $fecha_actual->sub(new \DateInterval('PT2H'));
         foreach($servicios_dias_semana as $sds)
         {   
+            $fecha_hora_servicio = new \DateTime($fecha_actual.' '.$sds->getHora());
             $fecha = null;
-            if($sds->getHora() < $hace_una_hora)
+            if($fecha_hora_servicio < $hace_dos_horas)
             {
                 for($i=$dayofweek+1; $i<=6; $i++)
                 {
@@ -63,6 +66,7 @@ class FechaProximaCommand extends ContainerAwareCommand
                         $fecha_calculo = new \DateTime($fecha_format.' '.$sds->getHora()->format('H:i'));
                         $fecha = date_add($fecha_calculo, date_interval_create_from_date_string($i-$dayofweek.' days'));
                         $sds->setFechaProxima($fecha);                                                
+                        $sds->setEstado('espera');                                                
                         //$em->persist($sds);            
                         $output->writeln('SERVICIO: '.$sds->getNombre().' actualizado a fecha proxima '.$sds->getFechaProxima()->format('d/m/Y H:i'));                
                         break;
@@ -71,6 +75,7 @@ class FechaProximaCommand extends ContainerAwareCommand
             }
             else {
                 $sds->setFechaProxima(new \DateTime($fecha_format.' '.$sds->getHora()->format('H:i')));
+                $sds->setEstado('espera');                                                
                 $output->writeln('SERVICIO: '.$sds->getNombre().' actualizado a fecha proxima '.$sds->getFechaProxima()->format('d/m/Y H:i'));
             }
         }                    
