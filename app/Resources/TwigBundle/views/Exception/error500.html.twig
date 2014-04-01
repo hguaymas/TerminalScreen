@@ -1,0 +1,18 @@
+{% extends 'TerminalAdminBundle::admin_layout.html.twig' %}
+
+
+{% block main_content %}
+<div class="page-title"> <i class="icon-custom-left"></i>
+    <h3>Ocurrió un <span class="semi-bold">Error</span></h3>
+</div> 
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple horizontal red">
+            <div class="grid-title no-border"></div>
+            <div class="grid-body no-border">
+                <p>Al parecer, hubo una falla en el sistema. Por favor, contáctese con un administrador para informar la situación</p>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endblock %}
