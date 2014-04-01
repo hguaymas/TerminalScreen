@@ -1,0 +1,49 @@
+{% extends 'form_div_layout.html.twig' %}
+{% block form_label %}
+    {% if required  %}
+        <i class="fa fa-asterisk tooltip_basic tooltip_validator asterisk" data-toggle="tooltip" title="Este dato es obligatorio"></i>&nbsp;
+    {% endif %}  
+    {{ parent() }}
+          
+{% endblock %}
+ 
+{% block button_widget %}
+{% spaceless %}
+    {% if label is empty %}
+        {% set label = name|humanize %}
+    {% endif %}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}><i></i>{{ label|trans({}, translation_domain) }}</button>
+{% endspaceless %}
+{% endblock button_widget %}
+    
+    
+{% block choice_widget_expanded %}
+{% spaceless %}
+    <div {{ block('widget_container_attributes') }}>
+    <div class="{{ (multiple ? 'checkbox' : 'radio ') }}{{color is defined ? color : ''}}">
+    {% for child in form %}
+        {{ form_widget(child) }}                
+        {% set label_attr = label_attr|merge({'for': child.vars.id}) %}
+        {% if label is empty %}
+            {% set label = child.vars.label|humanize %}
+        {% endif %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ child.vars.label|trans({}, translation_domain) }}</label>
+    {% endfor %}
+    </div>
+    </div>
+{% endspaceless %}
+{% endblock choice_widget_expanded %}    
+
+    
+{% block time_widget %}
+{% spaceless %}
+    {% if widget == 'single_text' %}
+        {{ block('form_widget_simple') }}
+    {% else %}
+        {% set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : { 'attr': {'class': 'select2'}} %}
+        <div {{ block('widget_container_attributes') }}>
+            {{ form_widget(form.hour, vars) }}{% if with_minutes %}:{{ form_widget(form.minute, vars) }}{% endif %}{% if with_seconds %}:{{ form_widget(form.second, vars) }}{% endif %}
+        </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock time_widget %}    

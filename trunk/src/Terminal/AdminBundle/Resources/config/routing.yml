@@ -1,0 +1,27 @@
+TerminalAdminBundle_feriados:
+     resource: "@TerminalAdminBundle/Resources/config/routing/feriado.yml"
+     prefix:   /administracion/feriados
+
+TerminalAdminBundle_servicio:
+    resource: "@TerminalAdminBundle/Resources/config/routing/servicio.yml"
+    prefix:   /administracion/servicios  
+
+terminal_admin_administracion_propietario:
+    resource: "@TerminalAdminBundle/Resources/config/routing/usuario.yml"
+    prefix:   /administracion/usuarios
+    
+TerminalAdminBundle_empresa:
+    resource: "@TerminalAdminBundle/Resources/config/routing/empresa.yml"
+    prefix:   /administracion/empresas    
+
+TerminalAdminBundle_localidad:
+    resource: "@TerminalAdminBundle/Resources/config/routing/localidad.yml"
+    prefix:   /administracion/localidades    
+
+TerminalAdminBundle_provincia:
+    resource: "@TerminalAdminBundle/Resources/config/routing/provincia.yml"
+    prefix:   /administracion/provincias    
+
+TerminalAdminBundle_pais:
+    resource: "@TerminalAdminBundle/Resources/config/routing/pais.yml"
+    prefix:   /administracion/paises    

@@ -1,0 +1,114 @@
+{% extends 'TerminalAdminBundle::admin_layout.html.twig' %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li>
+        <p>INICIO</p>
+    </li>
+    <li><a href="#">Configuración</a> </li>
+    <li><a href="#" class="active">Paises</a> </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+<!-- BEGIN PAGE CONTAINER-->
+<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<div class="page-title"> <i class="icon-custom-left"></i>
+    <h3>Listado de <span class="semi-bold">Paises</span></h3>
+</div>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple ">
+            <div class="grid-title">
+                <h4>Paises <span class="semi-bold">Registrados</span></h4>                    
+            </div>
+            <div class="grid-body ">
+                <table class="table datatable_general table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>              
+                        </tr>
+                    </thead>
+                    <tbody>
+        {% for entity in entities %}
+                        <tr>
+                            <td>{{ entity.nombre }}</td>
+                            <td>{{ entity.descripcion }}</td>
+                            <td>    
+                                <form action="{{ path('pais_delete', { 'id': entity.id }) }}" method="post" id="form_delete_{{entity.id}}">
+                                    <div class="hidden-phone">                                    
+                                        <button type="button" data-toggle="tooltip" title="Modificar" class="tip btn btn-success btn-xs btn-mini" onclick="window.location = '{{ path('pais_edit', { 'id': entity.id }) }}'"><i class="fa fa-pencil"></i></button>                                                                                                                
+                                        <button type="button" data-toggle="tooltip" id="{{ entity.id }}" title="Eliminar" class="confirm_delete tip btn btn-danger btn-xs btn-mini"><i class="fa fa-trash-o "></i></button>                                                                            
+                                    </div>
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                    {{ form_widget(deleteForms[entity.id]) }}
+                                </form>
+                            </td>                            
+                        </tr>
+        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+    {% endblock %}
+
+{% block stylesheets %}    
+<!-- BEGIN PLUGIN CSS -->
+<link href="{{ asset('assets/plugins/jquery-datatable/css/jquery.dataTables.css') }}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('assets/plugins/boostrap-checkbox/css/bootstrap-checkbox.css') }}" rel="stylesheet" type="text/css" media="screen"/>
+<link href="{{ asset('assets/plugins/datatables-responsive/css/datatables.responsive.css') }}" rel="stylesheet" type="text/css" media="screen"/>
+<!-- END PLUGIN CSS -->
+    {{ parent() }}
+{% endblock %}
+
+{% block footer_javascripts %}        
+    {{ parent() }}
+<!-- BEGIN PAGE LEVEL JS -->
+
+<script src="{{ asset('assets/plugins/jquery-datatable/js/jquery.dataTables.min.js') }}" type="text/javascript" ></script>
+<script src="{{ asset('assets/plugins/jquery-datatable/extra/js/TableTools.min.js') }}" type="text/javascript" ></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables-responsive/js/datatables.responsive.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables-responsive/js/lodash.min.js') }}"></script>
+
+<script src="{{ asset('js/tablas.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#nuevo_registro').on("click", function() {
+            document.location = '{{ path('pais_new') }}';
+        });
+        
+        $('.confirm_delete').on('click', function(){
+            var id = $(this).prop('id');                
+            bootbox.dialog({
+                message: "Está seguro de querer eliminar el País. Se eliminarán todas sus Provincias?",
+                title: "Confirmación de eliminación",
+                buttons: {
+                    cancel: {
+                        label: "Cancelar",
+                        className: "btn-default",
+                        callback: function() {                            
+                        }
+                    },
+                    delete: {
+                        label: "Eliminar",
+                        className: "btn-danger",
+                        callback: function() {
+                            $('#form_delete_'+id).submit();
+                        }
+                    }
+                }
+            });             
+        });
+    })
+</script>
+{% endblock %}
+

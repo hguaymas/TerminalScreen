@@ -15,7 +15,7 @@ framework:
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
-    default_locale:  "%locale%"
+    default_locale:  es_AR
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
@@ -23,11 +23,18 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    translator: { fallback: es }
 
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'TerminalAdminBundle:Default:form_widget.html.twig'
+            - 'TerminalAdminBundle:Default:form_errors.html.twig'
+    globals:
+        nombre_sistema: Sistema Terminal
 
 # Assetic Configuration
 assetic:
@@ -55,10 +62,13 @@ doctrine:
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: "%kernel.root_dir%/data/data.db3"
         # path:     "%database_path%"
-
+        mapping_types:
+            enum: array
+        types:
+            enum_dias_semana:  Terminal\AdminBundle\Doctrine\DBAL\Types\EnumDiasSemanaType
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        auto_mapping: true    
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -67,3 +77,18 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: admin_area
+    user_class: Terminal\AdminBundle\Entity\Usuario
+    
+avalanche_imagine:
+    filters:
+        avatar:
+            type:    thumbnail
+            options: { size: [69, 69], mode: outbound, quality: 100, format: jpg, cache_type: public }    
+        avatar_small:
+            type:    thumbnail
+            options: { size: [35, 35], mode: outbound, quality: 100, format: jpg, cache_type: public }    
+                

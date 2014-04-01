@@ -1,4 +1,36 @@
+terminal_front:
+    resource: "@TerminalFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
+_imagine:
+    resource: .
+    type:     imagine
+
 terminal_admin:
     resource: "@TerminalAdminBundle/Resources/config/routing.yml"
     prefix:   /
 
+admin_logout:
+    pattern:   /administracion/logout    
+    
+admin_login:
+    pattern:   /administracion/login
+    defaults:  { _controller: TerminalSecurityBundle:Default:login }
+    
+admin_login_check:
+    pattern:   /administracion/login_check
+    
+fos_user_security_login:
+    pattern:   /login
+    defaults:  { _controller: TerminalSecurityBundle:Default:login }
+    
+fos_user_security_check:
+    pattern:   /login_check
+    
+_homepage:
+    pattern:  /
+    defaults: { _controller: TerminalAdminBundle:Default:index }
+    
+_welcome:
+    pattern:  /administracion/servicios/
+    defaults: { _controller: TerminalAdminBundle:Servicio:index }    

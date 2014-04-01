@@ -1,0 +1,30 @@
+empresa:
+    pattern:  /
+    defaults: { _controller: "TerminalAdminBundle:Empresa:index" }
+
+empresa_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TerminalAdminBundle:Empresa:show" }
+
+empresa_new:
+    pattern:  /new
+    defaults: { _controller: "TerminalAdminBundle:Empresa:new" }
+
+empresa_create:
+    pattern:  /create
+    defaults: { _controller: "TerminalAdminBundle:Empresa:create" }
+    requirements: { _method: post }
+
+empresa_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TerminalAdminBundle:Empresa:edit" }
+
+empresa_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TerminalAdminBundle:Empresa:update" }
+    requirements: { _method: post|put }
+
+empresa_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TerminalAdminBundle:Empresa:delete" }
+    requirements: { _method: post|delete }

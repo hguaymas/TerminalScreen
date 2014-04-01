@@ -1,0 +1,7 @@
+parameters:
+#    terminal_security.example.class: Terminal\SecurityBundle\Example
+
+services:
+#    terminal_security.example:
+#        class: %terminal_security.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

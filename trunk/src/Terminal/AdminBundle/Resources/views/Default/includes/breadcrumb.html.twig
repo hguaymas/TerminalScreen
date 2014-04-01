@@ -1,0 +1,13 @@
+<ul class="breadcrumb">
+    <li>{% trans from "navigation"%}breadcrumbs.youarehere{% endtrans %}</li>
+    <li><a href="{{path('_welcome')}}" class="glyphicons dashboard"><i></i> {% trans from "navigation"%}breadcrumbs.inicio{% endtrans %}</a></li>
+    <li class="divider"><i class="fa-caret-right"></i></li>
+    {% for key, item in breadcrumb %}  
+    {% if loop.last %}
+      <li>{{ key }}</li>
+    {% else %}      
+      <li><a href="{{path(item)}}">{{ key }}</a></li>
+      <li class="divider"><i class="fa-caret-right"></i></li>
+    {% endif %}
+  {% endfor %}    
+</ul>

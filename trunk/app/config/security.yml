@@ -1,26 +1,43 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        FOS\UserBundle\Model\UserInterface: sha512        
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
-    providers:
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+    providers:             
+        fos_userbundle:            
+            id: fos_user.user_provider.username_email    
 
     firewalls:
+        admin_area:
+            pattern:            ^/administracion(.*)
+            form_login:
+                provider:       fos_userbundle
+                login_path:     admin_login
+                check_path:     admin_login_check
+                failure_path:   admin_login
+                always_use_default_target_path: true
+                default_target_path: /administracion/servicios
+            logout:
+                path:           admin_logout
+                target:         admin_login          
+            anonymous: true
+            remember_me:
+              key:      "%secret%"
+              lifetime: 31536000 # 365 days in seconds
+              path:     /
+              domain:   ~ # Defaults to the current domain from $_SERVER
+        
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
+        
+        login_firewall:
+          pattern:    ^/administracion/login$
+          anonymous:  ~
+          security: false 
 
         secured_area:
             pattern:    ^/demo/secured/
@@ -34,5 +51,12 @@ security:
             #http_basic:
             #    realm: "Secured Demo Area"
 
-    access_control:
+    access_control:        
+        - { path: ^/servicios$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/administracion/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/administracion/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/administracion/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/administracion/usuario, role: ROLE_ADMIN }
+        - { path: ^/administracion, role: ROLE_USER }                        
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
