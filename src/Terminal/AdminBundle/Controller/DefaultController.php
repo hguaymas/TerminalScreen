@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('TerminalAdminBundle:Default:index.html.twig', array('name' => 'Hernan'));
+        return $this->redirect($this->generateUrl('servicio'));
     }
 }

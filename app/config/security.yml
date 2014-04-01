@@ -53,10 +53,10 @@ security:
 
     access_control:        
         - { path: ^/servicios$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/administracion, role: ROLE_USER }
+        - { path: ^/administracion/usuario, role: ROLE_ADMIN }  
+        - { path: ^/administracion$, role: ROLE_USER }
         - { path: ^/administracion/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administracion/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administracion/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/administracion/usuario, role: ROLE_ADMIN }                                
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }                                      
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

@@ -1,3 +1,7 @@
+administracion:
+    pattern:   /administracion
+    defaults:  { _controller: TerminalAdminBundle:Default:index }
+    
 terminal_front:
     resource: "@TerminalFrontBundle/Resources/config/routing.yml"
     prefix:   /
