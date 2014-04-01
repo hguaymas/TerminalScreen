@@ -154,7 +154,7 @@ class Servicio
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_hasta", type="date", nullable=true)
+     * @ORM\Column(name="fecha_hasta", type="datetime", nullable=true)
      */
     private $fechaHasta;
     
