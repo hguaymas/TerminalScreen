@@ -98,8 +98,7 @@
 <script type="text/javascript">
     
     $(document).ready(function() {
-        $('#nuevo_registro').on("click", function() {
-            console.log('culiau');
+        $(document).on("click", '#nuevo_registro', function() {            
             document.location = '{{ path('servicio_new') }}';
         });
         

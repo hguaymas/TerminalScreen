@@ -125,6 +125,9 @@
                 <li class="start active tip" data-toggle="tooltip" title="Inicio"> <a href="{{path('_welcome')}}"> <i class="icon-custom-home"></i> <span class="title">Inicio</span> <span class="selected"></span></a> </li>
                 <li class="tip" data-toggle="tooltip" title="Configuración"> <a href="javascript:;"> <i class="fa fa-th"></i> <span class="title">Configuración</span> <span class="arrow "></span></a> 
                     <ul class="sub-menu">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li> <a href="{{path('usuario')}}"> Usuarios </a> </li>
+                        {% endif %}
                         <li> <a href="{{path('pais')}}"> Paises </a> </li>
                         <li> <a href="{{path('provincia')}}"> Provincias </a> </li>
                         <li> <a href="{{path('localidad')}}"> Localidades </a> </li>                        
