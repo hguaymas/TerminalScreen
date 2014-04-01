@@ -17,8 +17,8 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $usuarios = array(
-            array('username' => 'hguaymas', 'password' => 'hguaymas', 'nombre' => 'Hernan', 'apellido' => 'Guaymás', 'email' => 'hguaymas@gmail.com', 'roles' => array('ROLE_USER')),            
-            array('username' => 'rlevin', 'password' => 'rlevin', 'nombre' => 'Rubén', 'apellido' => 'Levin', 'email' => 'capocha_79@hotmail.com.ar', 'roles' => array('ROLE_ADMIN', 'ROLE_USER')),                        
+            array('username' => 'hguaymas', 'password' => 'hguaymas', 'nombre' => 'Hernan', 'apellido' => 'Guaymás', 'email' => 'hguaymas@gmail.com', 'roles' => array('ROLE_ADMIN', 'ROLE_USER')),            
+            array('username' => 'rlevin', 'password' => 'rlevin', 'nombre' => 'Rubén', 'apellido' => 'Levin', 'email' => 'ruben@nivelseguros.com.ar', 'roles' => array('ROLE_ADMIN', 'ROLE_USER')),                        
         );
         $i=0;
         foreach($usuarios as $usuario)
