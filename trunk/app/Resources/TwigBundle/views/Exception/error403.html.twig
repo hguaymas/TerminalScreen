@@ -1,0 +1,18 @@
+{% extends 'TerminalAdminBundle::admin_layout.html.twig' %}
+
+
+{% block main_content %}
+<div class="page-title"> <i class="icon-custom-left"></i>
+    <h3>Acceso <span class="semi-bold">No Autorizado</span></h3>
+</div> 
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple horizontal red">
+            <div class="grid-title no-border"></div>
+            <div class="grid-body no-border">
+                <p>No puede acceder a esta página ya que no cuenta con los permisos correspondientes. Solicite autorización al administrador.</p>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endblock %}
