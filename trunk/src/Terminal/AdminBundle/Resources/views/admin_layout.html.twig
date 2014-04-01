@@ -47,7 +47,7 @@
                     </a> </li>
             </ul>
             <!-- BEGIN LOGO -->
-            <a href="index.html"><img src="{{ asset('images/logo.png') }}" class="logo" alt=""  data-src="{{ asset('images/logo.png') }}" width="106" height="21"/></a>
+            <a href="{{path('_welcome')}}"><img src="{{ asset('images/logo.png') }}" class="logo" alt=""  data-src="{{ asset('images/logo.png') }}" width="106" height="21"/></a>
             <!-- END LOGO -->
             <ul class="nav pull-right notifcation-center">
                 <li class="dropdown" id="header_task_bar"> <a href="{{path('_welcome')}}" class="dropdown-toggle active" data-toggle="">
@@ -141,9 +141,9 @@
             <!-- END SIDEBAR MENU -->
         </div>
     </div>
-    <div class="footer-widget">        
+    <div class="footer-widget">                
         <div class="pull-right">            
-            <a href="{{ path('admin_logout') }}"><i class="fa fa-power-off"></i></a></div>
+            <a href="{{ path('admin_logout') }}"><i class="fa fa-power-off"></i></a></div>                                                                     
     </div>
     <!-- END SIDEBAR -->
     <!-- BEGIN PAGE CONTAINER-->    
@@ -163,7 +163,6 @@
         {% endblock %}
 
         </div> 
-    </div> 
+    </div>     
     <!-- END CONTAINER -->
 {% endblock %}
-
