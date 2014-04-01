@@ -1,0 +1,244 @@
+{% extends 'TerminalAdminBundle::admin_layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+<link href="{{ asset('assets/plugins/bootstrap-datepicker/css/datepicker.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li>
+        <p>INICIO</p>
+    </li>
+    <li><a href="{{path('servicio')}}">Servicios</a> </li>
+    <li><a href="#" class="active">Nuevo Servicio</a> </li>
+</ul>
+{% endblock %}
+{% block main_content %}
+<div class="page-title"> <i class="icon-custom-left"></i>
+    <h3>Nuevo <span class="semi-bold">Servicio</span></h3>
+</div>  
+<form action="{{ path('servicio_create') }}" id="servicio_form" method="post" {{ form_enctype(form) }} >
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4>Datos <span class="semi-bold">Principales</span></h4>                
+                </div>
+                <div class="grid-body no-border">                                                     
+                    <div class="form-group">
+                        {{ form_label(form.tipo, 'Tipo de Servicio', {'label_attr': {'class': 'form-label'}})}}
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.tipo,{'color' : 'radio-info'}) }}
+                            {{ form_errors(form.tipo) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.empresa, 'Empresa', {'label_attr': {'class': 'form-label'}})}}
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.empresa,{ 'attr' : { 'class' : 'select2' }}) }}
+                            {{ form_errors(form.empresa) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.pais, 'Pais', {'label_attr': {'class': 'form-label'}})}}
+                        <span class="help">País de destino o procedencia.</span>
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.pais,{ 'attr' : { 'class' : 'select2' }}) }}
+                            {{ form_errors(form.pais) }}                            
+                        </div>                       
+                    </div>                    
+                    <div class="form-group">
+                        {{ form_label(form.provincia, 'Provincia', {'label_attr': {'class': 'form-label'}})}}
+                        <span class="help">Provincia de destino o procedencia. Si solo quiere mostrar PAIS puede dejarlo sin seleccionar.</span>
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.provincia,{ 'attr' : { 'class' : 'select2' }}) }}
+                            {{ form_errors(form.provincia) }}                            
+                        </div>                       
+                    </div>                    
+                    <div class="form-group">
+                        {{ form_label(form.localidad, 'Localidad', {'label_attr': {'class': 'form-label'}})}}
+                        <span class="help">Localidad de destino o procedencia. Si solo quiere mostrar PAIS o PROVINCIA puede dejarlo sin seleccionar.</span>
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.localidad,{ 'attr' : { 'class' : 'select2' }}) }}
+                            {{ form_errors(form.localidad) }}                            
+                        </div>                       
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.nombre, 'Nombre', {'label_attr': {'class': 'form-label'}}) }}
+                        <span class="help">Nombre a mostrar por pantalla. Por ej. LA QUIACA</span>
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.nombre,{ 'attr' : { 'class' : 'form-control' }}) }}
+                            {{ form_errors(form.nombre) }}
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        {{ form_label(form.hora, 'Hora', {'label_attr': {'class': 'form-label'}})}}
+                        <span class="help">Hora de Salida o Arribo del servicio</span>
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.hora) }}
+                            {{ form_errors(form.hora) }}
+                        </div>
+                    </div>                     
+                    <div class="form-group">
+                        {{ form_label(form.plataforma, 'Plataforma', {'label_attr': {'class': 'form-label'}})}}
+                        <span class="help">Plataforma/s de salida o arribo (podrá actualizarla antes de mostrar el servicio). Ej 10 ó 12 - 15</span>
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.plataforma,{ 'attr' : { 'class' : 'form-control' }}) }}
+                            {{ form_errors(form.plataforma) }}
+                        </div>
+                    </div>                     
+                    <div class="form-group">
+                        {{ form_label(form.tipoFrecuencia, 'Tipo de Frecuencia', {'label_attr': {'class': 'form-label'}})}}
+                        <span class="help">Seleccione cada cuanto tiempo se repite el servicio. Puede ser todos los días de la semana, en ciertos días o cada cierta cantidad de días.</span>
+                        {{ form_widget(form.tipoFrecuencia,{'color' : 'radio-success'}) }}                                                    
+                        {{ form_errors(form.tipoFrecuencia) }}
+                    </div>
+                    <div class="form-group" id="div_frecuencia" style="display: none;">
+                        {{ form_label(form.frecuencia, 'Frecuencia', {'label_attr': {'class': 'form-label'}})}}
+                        <span class="help">Ingrese sólo cada cuantos días se repite el servicio. Por ej. 3, que significa que cada 3 días se brinda el servicio a la hora indicada.</span>
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.frecuencia,{ 'attr' : { 'class' : 'form-control' }}) }}
+                            {{ form_errors(form.frecuencia) }}                            
+                        </div>                       
+                    </div>                    
+                    <div class="form-group" id="div_xdias">
+                        <label class="form-label">Dias de la semana</label>
+                        <span class="help">Seleccione los días de la semana en que se brinda el servicio, puede ser todos los días o algunos días de la semana.</span>
+                        <div class="checkbox check-warning">                                                                   
+                            {{ form_widget(form.lunes) }}
+                            {{ form_label(form.lunes, 'Lunes')}}
+                            {{ form_widget(form.martes) }}
+                            {{ form_label(form.martes, 'Martes')}}
+                            {{ form_widget(form.miercoles) }}
+                            {{ form_label(form.miercoles, 'Miércoles')}}
+                            {{ form_widget(form.jueves) }}
+                            {{ form_label(form.jueves, 'Jueves')}}
+                            {{ form_widget(form.viernes) }}
+                            {{ form_label(form.viernes, 'Viernes')}}
+                            {{ form_widget(form.sabado) }}
+                            {{ form_label(form.sabado, 'Sábado')}}
+                            {{ form_widget(form.domingo) }}
+                            {{ form_label(form.domingo, 'Domingo')}}
+                            {{ form_widget(form.feriados) }}
+                            {{ form_label(form.feriados, 'Feriados')}}
+                        </div>                       
+                        <span id="errores_dias" class="error" style="display: none;">Seleccione al menos un día de la semana</span>
+                    </div>                    
+                    <div class="form-group">
+                        {{ form_label(form.fechaInicial, 'Fecha inicial', {'label_attr': {'class': 'form-label'}})}}
+                        <span class="help">Ingrese la fecha desde cuándo se brinda el servicio. Sirve para el cálculo de los servicios cada X cantidad de días. Por ej. día de por medio</span>
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.fechaInicial,{ 'attr' : { 'class' : 'form-control datepicker' }}) }}
+                            {{ form_errors(form.fechaInicial) }}                            
+                        </div>                       
+                    </div>                    
+                    <div class="form-group">
+                        {{ form_label(form.fechaHasta, 'Fecha hasta', {'label_attr': {'class': 'form-label'}})}}
+                        <span class="help">Ingrese la fecha hasta cuándo se brindará el servicio. Sirve para indicar si es un servicio de temporada y para que no se muestre en pantalla desde dicha fecha.</span>
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.fechaHasta,{ 'attr' : { 'class' : 'form-control datepicker' }}) }}
+                            {{ form_errors(form.fechaHasta) }}                            
+                        </div>                       
+                    </div>                                                                                              
+                    {{ form_rest(form) }}
+                    <div class="form-actions">  
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary btn-cons"><i class="icon-ok"></i> Guardar</button>
+                            <button type="button" onclick="document.location = '{{ path('servicio') }}'" class="btn btn-white btn-cons">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>		                
+    </div>           
+</form>
+
+{% endblock %}
+
+    {% block footer_javascripts %}        
+        {{ parent() }}
+
+<script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js') }}"></script>
+<script src="{{ asset('assets/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/formularios.js') }}"></script> 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#servicio_tipoFrecuencia input').change(function(){
+            var value = $(this).prop('value');
+            if($(this).is(':checked') === true)
+            {                
+                if(value === 'dias_semana')
+                {
+                    $('#div_frecuencia').hide();                        
+                    $('#div_frecuencia').val('');                        
+                    $('#div_xdias').show();                        
+                }
+                else if(value === 'cada_x_dias')
+                {
+                    $('#div_frecuencia').show();                        
+                    $('#servicio_frecuencia').focus();                        
+                    $('#div_xdias').hide();
+                }                
+            }            
+        }); 
+        
+        $('#servicio_pais').change(function(){            
+            $.ajax({
+                url: '{{ path('provincias_pais') }}',
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    id: $(this).val()
+                },
+                success: function(data)
+                {
+                    setCampoNombre();
+                    $('#servicio_provincia').html(data.provincias);
+                    $('#servicio_localidad').html(data.localidades);
+                }
+            })
+        });
+        $('#servicio_provincia').change(function(){            
+            $.ajax({
+                url: '{{ path('localidades_provincia') }}',
+                dataType: 'html',
+                type: 'POST',
+                data: {
+                    id: $(this).val()
+                },
+                success: function(data)
+                {
+                    setCampoNombre();
+                    $('#servicio_localidad').html(data);
+                }
+            })
+        });
+        $('#servicio_localidad').change(function(){                        
+            setCampoNombre();        
+        });                
+    })
+    
+    function setCampoNombre()
+    {
+        if($('#servicio_localidad').val() !== '')
+            $('#servicio_nombre').val($('#servicio_localidad option:selected').text());
+        else if($('#servicio_provincia').val() !== '')
+            $('#servicio_nombre').val($('#servicio_provincia option:selected').text());
+        else if($('#servicio_pais').val() !== '')
+            $('#servicio_nombre').val($('#servicio_pais option:selected').text());
+    }
+    
+</script>
+    {% endblock %}

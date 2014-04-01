@@ -1,0 +1,34 @@
+usuario:
+    pattern:  /
+    defaults: { _controller: "TerminalAdminBundle:Usuario:index" }
+
+usuario_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TerminalAdminBundle:Usuario:show" }
+
+usuario_new:
+    pattern:  /new
+    defaults: { _controller: "TerminalAdminBundle:Usuario:new" }
+
+usuario_create:
+    pattern:  /create
+    defaults: { _controller: "TerminalAdminBundle:Usuario:create" }
+    requirements: { _method: post }
+
+usuario_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TerminalAdminBundle:Usuario:edit" }
+
+usuario_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TerminalAdminBundle:Usuario:update" }
+    requirements: { _method: post|put }
+
+usuario_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TerminalAdminBundle:Usuario:delete" }
+    requirements: { _method: post|delete }
+
+usuario_micuenta:
+    pattern:  /mi_cuenta
+    defaults: { _controller: "TerminalAdminBundle:Usuario:miCuenta" }

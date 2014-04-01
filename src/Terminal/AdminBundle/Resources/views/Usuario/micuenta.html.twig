@@ -1,0 +1,147 @@
+{% extends 'TerminalAdminBundle::admin_layout.html.twig' %}
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li>
+        <p>INICIO</p>
+    </li>
+    <li><a href="#" class="active">Mi Cuenta</a> </li>
+</ul>
+{% endblock %}
+{% block main_content %}
+<div class="page-title"> <i class="icon-custom-left"></i>
+    <h3>Mi <span class="semi-bold">Cuenta</span></h3>
+</div>  
+<div class="row">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" id="mi_cuenta">
+            <li {{ tab_error == 0 ? 'class="active"' : '' }}><a href="#account-details">Datos personales</a></li>                   
+            <li {{ tab_error == 1 ? 'class="active"' : '' }}><a href="#change-password">Cambiar la contraseña</a></li>
+        </ul>
+        <div class="tab-content">           
+            <!-- Tab content -->
+            <div class="tab-pane {{ tab_error == 0 ? 'active' : '' }}" id="account-details">
+                            {{ form_start(edit_form, {'attr' : {'id': 'form_cuenta_details'}, 'action': path('usuario_micuenta')}) }}                            
+                <input type="hidden" name="form" value="edit"/>                            
+                
+                                {{ form_errors(edit_form) }} 
+                <div class="grid simple">
+                    <div class="grid-body no-border">                
+                        <div class="form-group">
+                                            {{ form_label(edit_form.apellido, 'Apellido', {'label_attr': {'class': 'form-label'}}) }}
+                            <div class="input-with-icon  right">                                       
+                                <i class=""></i>
+                                                {{ form_widget(edit_form.apellido,{ 'attr' : { 'class' : 'form-control' }}) }}
+                                                {{ form_errors(edit_form.apellido) }}
+                            </div>
+                        </div>            
+                        <div class="form-group">
+                                            {{ form_label(edit_form.nombre, 'Nombre', {'label_attr': {'class': 'form-label'}}) }}
+                            <div class="input-with-icon  right">                                       
+                                <i class=""></i>
+                                                {{ form_widget(edit_form.nombre,{ 'attr' : { 'class' : 'form-control' }}) }}
+                                                {{ form_errors(edit_form.nombre) }}
+                            </div>
+                        </div>            
+                        <div class="form-group">
+                                            {{ form_label(edit_form.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+                            <div class="input-with-icon  right">                                       
+                                <i class=""></i>
+                                                {{ form_widget(edit_form.email,{ 'attr' : { 'class' : 'form-control' }}) }}
+                                                {{ form_errors(edit_form.email) }}
+                            </div>
+                        </div>            
+                        <div class="form-group">
+                                            {{ form_label(edit_form.telefono, 'Teléfono', {'label_attr': {'class': 'form-label'}}) }}
+                            <div class="input-with-icon  right">                                       
+                                <i class=""></i>
+                                                {{ form_widget(edit_form.telefono,{ 'attr' : { 'class' : 'form-control' }}) }}
+                                                {{ form_errors(edit_form.telefono) }}
+                            </div>
+                                            {{ form_rest(edit_form) }}
+                        </div>
+                        <div class="form-actions">  
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary btn-cons"><i class="icon-ok"></i> Guardar</button>
+                                <button type="button" onclick="document.location = '{{ path('_welcome') }}'" class="btn btn-white btn-cons">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                              {{ form_end(edit_form) }}                                                     
+            </div>
+            <!-- // Tab content END -->
+
+            <!-- Tab content -->
+            <div class="tab-pane {{ tab_error == 1 ? 'active' : '' }}" id="change-password">
+                                {{ form_start(change_password, {'attr' : {'id': 'form_cuenta_password'}, 'action': path('usuario_micuenta')}) }}                                                            
+                <input type="hidden" name="form" value="change_password"/>
+                
+                                {{ form_errors(change_password) }} 
+                <div class="grid simple">
+                    <div class="grid-body no-border">                
+                        <div class="form-group">
+                                            {{ form_label(change_password.username, 'Nombre de Usuario', {'label_attr': {'class': 'form-label'}}) }}
+                            <div class="input-with-icon  right">                                       
+                                <i class=""></i>
+                                                {{ form_widget(change_password.username,{ 'attr' : { 'class' : 'form-control', 'readonly': 'readonly' }}) }}
+                                                {{ form_errors(change_password.username) }}
+                            </div>
+                        </div>   
+                        <div class="form-group">
+                                            {{ form_label(change_password.current_password, 'Contraseña actual', {'label_attr': {'class': 'form-label'}}) }}
+                            <span class="help">Ingrese la contraseña que utiliza actualmente</span>
+                            <div class="input-with-icon  right">                                       
+                                <i class=""></i>
+                                                {{ form_widget(change_password.current_password,{ 'attr' : { 'class' : 'form-control'}}) }}                                                
+                                                {{ form_errors(change_password.current_password) }}
+                            </div>
+                        </div>   
+                        <div class="form-group">
+                                            {{ form_label(change_password.plainPassword.first, 'Nueva Contraseña', {'label_attr': {'class': 'form-label'}}) }}
+                            <span class="help">Ingrese la nueva contraseña.</span>
+                            <div class="input-with-icon  right">                                       
+                                <i class=""></i>
+                                                {{ form_widget(change_password.plainPassword.first,{ 'attr' : { 'class' : 'form-control'}}) }}                                                
+                                                {{ form_errors(change_password.plainPassword.first) }}
+                            </div>
+                        </div>   
+                        <div class="form-group">
+                                            {{ form_label(change_password.plainPassword.second, 'Nueva Contraseña', {'label_attr': {'class': 'form-label'}}) }}
+                            <span class="help">Repita la nueva contraseña</span>
+                            <div class="input-with-icon  right">                                       
+                                <i class=""></i>
+                                                {{ form_widget(change_password.plainPassword.second,{ 'attr' : { 'class' : 'form-control'}}) }}                                                
+                                                {{ form_errors(change_password.plainPassword.second) }}
+                            </div>
+                                            {{ form_rest(change_password) }}
+                        </div>   
+                        <div class="form-actions">  
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary btn-cons"><i class="icon-ok"></i> Guardar</button>
+                                <button type="button" onclick="document.location = '{{ path('_welcome') }}'" class="btn btn-white btn-cons">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                              {{ form_end(edit_form) }}                                                     
+            </div>                                
+        </div>                                                                                            
+    </div>
+</div>
+
+
+{% endblock %}
+{% block footer_javascripts %}        
+        {{ parent() }}
+
+<script src="{{ asset('assets/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/formularios.js') }}"></script>   
+<script type="text/javascript">
+    $(document).ready(function(){
+           $('#mi_cuenta a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+    })
+</script>
+    {% endblock %}        

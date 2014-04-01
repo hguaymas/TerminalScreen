@@ -1,0 +1,84 @@
+{% extends 'TerminalAdminBundle::admin_layout.html.twig' %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li>
+        <p>INICIO</p>
+    </li>
+    <li><a href="#">Configuración</a> </li>
+    <li><a href="{{path('localidad')}}">Localidades</a> </li>
+    <li><a href="#" class="active">Modificar Localidad</a> </li>
+</ul>
+{% endblock %}
+{% block main_content %}
+<div class="page-title"> <i class="icon-custom-left"></i>
+    <h3>Modificar <span class="semi-bold">Localidad</span></h3>
+</div>  
+<form action="{{ path('localidad_update', { 'id': entity.id }) }}" id="localidad_form" method="post" {{ form_enctype(form) }} >
+    <input type="hidden" name="_method" value="PUT" /> 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4>Datos <span class="semi-bold">Principales</span></h4>                
+                </div>
+                <div class="grid-body no-border">                
+                    <div class="form-group">
+                        {{ form_label(form.nombre, 'Nombre', {'label_attr': {'class': 'form-label'}}) }}
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.nombre,{ 'attr' : { 'class' : 'form-control' }}) }}
+                            {{ form_errors(form.nombre) }}
+                        </div>
+                    </div>                    
+                    <div class="form-group">
+                        {{ form_label(form.descripcion, 'Descripción', {'label_attr': {'class': 'form-label'}})}}
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.descripcion,{ 'attr' : { 'class' : 'form-control' }}) }}
+                            {{ form_errors(form.descripcion) }}
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_label(form.provincia, 'Provincia', {'label_attr': {'class': 'form-label'}})}}
+                        <div class="input-with-icon  right">
+                            <i class=""></i>
+                            <div class="col-md-3">                              
+                                {{ form_widget(form.provincia,{ 'attr' : { 'class' : 'select2' }}) }}                                  
+                            </div>                        
+                            <button class="btn btn-default" type="button">Agregar provincia</button>
+                            {{ form_errors(form.provincia) }}
+                        </div>
+                    </div>                                        
+                    <div class="form-group">
+                        {{ form_label(form.codPostal, 'Código Postal', {'label_attr': {'class': 'form-label'}})}}
+                        <span class="help">ej. 4401</span>
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.codPostal,{ 'attr' : { 'class' : 'form-control' }}) }}
+                            {{ form_errors(form.codPostal) }}
+                        </div>
+                    </div> 
+                    {{form_rest(form)}}                                                                     
+                    <div class="form-actions">  
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary btn-cons"><i class="icon-ok"></i> Guardar</button>
+                            <button type="button" onclick="document.location = '{{ path('localidad') }}'" class="btn btn-white btn-cons">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>		                
+    </div>           
+</form>
+
+{% endblock %}
+
+    {% block footer_javascripts %}        
+        {{ parent() }}
+
+<script src="{{ asset('js/extend/js/jasny-bootstrap.js') }}"></script>
+<script src="{{ asset('assets/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/formularios.js') }}"></script>   
+    {% endblock %}

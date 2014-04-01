@@ -1,0 +1,30 @@
+feriados:
+    pattern:  /
+    defaults: { _controller: "TerminalAdminBundle:Feriado:index" }
+
+feriados_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TerminalAdminBundle:Feriado:show" }
+
+feriados_new:
+    pattern:  /new
+    defaults: { _controller: "TerminalAdminBundle:Feriado:new" }
+
+feriados_create:
+    pattern:  /create
+    defaults: { _controller: "TerminalAdminBundle:Feriado:create" }
+    requirements: { _method: post }
+
+feriados_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TerminalAdminBundle:Feriado:edit" }
+
+feriados_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TerminalAdminBundle:Feriado:update" }
+    requirements: { _method: post|put }
+
+feriados_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TerminalAdminBundle:Feriado:delete" }
+    requirements: { _method: post|delete }

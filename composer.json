@@ -21,7 +21,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "doctrine/data-fixtures": "dev-master"
+        "doctrine/data-fixtures": "dev-master",
+        "avalanche123/imagine-bundle": "v2.1",
+        "liuggio/excelbundle": "~2.0"
     },
     "scripts": {
         "post-install-cmd": [

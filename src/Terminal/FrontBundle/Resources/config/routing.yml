@@ -1,0 +1,3 @@
+servicios_front:
+    pattern:  /servicios
+    defaults: { _controller: TerminalFrontBundle:Default:index }

@@ -1,0 +1,77 @@
+{% extends 'TerminalAdminBundle::admin_layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+<link href="{{ asset('assets/plugins/bootstrap-datepicker/css/datepicker.css') }}" rel="stylesheet">
+{% endblock %}
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li>
+        <p>INICIO</p>
+    </li>
+    <li><a href="#">Configuración</a> </li>
+    <li><a href="{{path('feriados')}}">Feriados</a> </li>
+    <li><a href="#" class="active">Modificar Feriado</a> </li>
+</ul>
+{% endblock %}
+{% block main_content %}
+<div class="page-title"> <i class="icon-custom-left"></i>
+    <h3>Modificar <span class="semi-bold">Feriado</span></h3>
+</div>  
+<form action="{{ path('feriados_update', { 'id': entity.id }) }}" id="feriado_form" method="post" {{ form_enctype(form) }} >
+    <input type="hidden" name="_method" value="PUT" />   
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4>Datos <span class="semi-bold">Principales</span></h4>                
+                </div>
+                <div class="grid-body no-border">                
+                    <div class="form-group">
+                        {{ form_label(form.fecha, 'Fecha feriado', {'label_attr': {'class': 'form-label'}})}}
+                        <span class="help">Ingrese la fecha correspondiente al feriado</span>
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.fecha,{ 'attr' : { 'class' : 'form-control datepicker' }}) }}
+                            {{ form_errors(form.fecha) }}                            
+                        </div>                       
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.nombre, 'Nombre', {'label_attr': {'class': 'form-label'}}) }}
+                        <span class="help">Ingrese un nombre que identifique el feriado. Por ej. Día del Trabajador</span>
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.nombre,{ 'attr' : { 'class' : 'form-control' }}) }}
+                            {{ form_errors(form.nombre) }}
+                        </div>
+                    </div>                    
+                    <div class="form-group">
+                        {{ form_label(form.descripcion, 'Descripción', {'label_attr': {'class': 'form-label'}})}}
+                        <div class="input-with-icon  right">                                       
+                            <i class=""></i>
+                            {{ form_widget(form.descripcion,{ 'attr' : { 'class' : 'form-control' }}) }}
+                            {{ form_errors(form.descripcion) }}
+                        </div>
+                    </div>                                                          
+                    {{form_rest(form)}}                                                                     
+                    <div class="form-actions">  
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary btn-cons"><i class="icon-ok"></i> Guardar</button>
+                            <button type="button" onclick="document.location = '{{ path('feriados') }}'" class="btn btn-white btn-cons">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>		                
+    </div>           
+</form>
+
+{% endblock %}
+
+    {% block footer_javascripts %}        
+        {{ parent() }}
+
+<script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js') }}"></script>
+<script src="{{ asset('assets/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/formularios.js') }}"></script>   
+    {% endblock %}

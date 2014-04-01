@@ -1,0 +1,34 @@
+provincias_pais:
+    pattern:  /provincias_pais
+    defaults: { _controller: "TerminalAdminBundle:Provincia:provinciasPais" }
+    
+provincia:
+    pattern:  /
+    defaults: { _controller: "TerminalAdminBundle:Provincia:index" }
+
+provincia_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TerminalAdminBundle:Provincia:show" }
+
+provincia_new:
+    pattern:  /new
+    defaults: { _controller: "TerminalAdminBundle:Provincia:new" }
+
+provincia_create:
+    pattern:  /create
+    defaults: { _controller: "TerminalAdminBundle:Provincia:create" }
+    requirements: { _method: post }
+
+provincia_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TerminalAdminBundle:Provincia:edit" }
+
+provincia_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TerminalAdminBundle:Provincia:update" }
+    requirements: { _method: post|put }
+
+provincia_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TerminalAdminBundle:Provincia:delete" }
+    requirements: { _method: post|delete }

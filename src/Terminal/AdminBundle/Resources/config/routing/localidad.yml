@@ -1,0 +1,34 @@
+localidades_provincia:
+    pattern:  /localidades_provincia
+    defaults: { _controller: "TerminalAdminBundle:Localidad:localidadesProvincia" }
+
+localidad:
+    pattern:  /
+    defaults: { _controller: "TerminalAdminBundle:Localidad:index" }
+
+localidad_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TerminalAdminBundle:Localidad:show" }
+
+localidad_new:
+    pattern:  /new
+    defaults: { _controller: "TerminalAdminBundle:Localidad:new" }
+
+localidad_create:
+    pattern:  /create
+    defaults: { _controller: "TerminalAdminBundle:Localidad:create" }
+    requirements: { _method: post }
+
+localidad_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TerminalAdminBundle:Localidad:edit" }
+
+localidad_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TerminalAdminBundle:Localidad:update" }
+    requirements: { _method: post|put }
+
+localidad_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TerminalAdminBundle:Localidad:delete" }
+    requirements: { _method: post|delete }

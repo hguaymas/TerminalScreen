@@ -1,0 +1,30 @@
+pais:
+    pattern:  /
+    defaults: { _controller: "TerminalAdminBundle:Pais:index" }
+
+pais_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TerminalAdminBundle:Pais:show" }
+
+pais_new:
+    pattern:  /new
+    defaults: { _controller: "TerminalAdminBundle:Pais:new" }
+
+pais_create:
+    pattern:  /create
+    defaults: { _controller: "TerminalAdminBundle:Pais:create" }
+    requirements: { _method: post }
+
+pais_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TerminalAdminBundle:Pais:edit" }
+
+pais_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TerminalAdminBundle:Pais:update" }
+    requirements: { _method: post|put }
+
+pais_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TerminalAdminBundle:Pais:delete" }
+    requirements: { _method: post|delete }

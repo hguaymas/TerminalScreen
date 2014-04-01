@@ -1,0 +1,60 @@
+{% extends 'TerminalSecurityBundle::login_layout.html.twig' %}
+{% block body %}
+<div class="container">
+  <div class="row login-container column-seperation">  
+        <div class="col-md-5 col-md-offset-1">
+          <h2>Ingresar a {{nombre_sistema}}</h2>
+          <p>Ingrese su usuario y contraseña para iniciar sesión</p>
+          <br/><br/><br/><br/><br/>
+        </div>
+        <div class="col-md-5 "> <br>
+		 <form id="login-form" class="login-form" action="{{ path("admin_login_check") }}" method="post">
+		 
+                     <div class="row">
+		 <div class="form-group col-md-10">
+                     {% if error %}
+                    <div class="alert alert-error"><button class="close" data-dismiss="alert"></button>{{ error|trans }}</div>
+                {% endif %}
+                     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            <label class="form-label">Usuario o Email</label>
+            <div class="controls">
+				<div class="input-with-icon  right">                                       
+					<i class=""></i>
+					<input type="text" value="{{ last_username }}" name="_username" id="txtusername" class="form-control">                                 
+				</div>
+            </div>
+          </div>
+          </div>
+		  <div class="row">
+          <div class="form-group col-md-10">
+            <label class="form-label">Contraseña</label>
+            <span class="help"></span>
+            <div class="controls">
+				<div class="input-with-icon  right">                                       
+					<i class=""></i>
+					<input type="password" name="_password" id="txtpassword" class="form-control">                                 
+				</div>
+            </div>
+          </div>
+          </div>
+		  <div class="row">
+          <div class="control-group  col-md-10">
+            <div class="checkbox checkbox check-success"> <a href="#">¿Olvidó su contraseña?</a>&nbsp;&nbsp;
+              <input type="checkbox" id="checkbox1" value="1" name="_remember_me">
+              <label for="checkbox1">Recordarme </label>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10">
+              <button class="btn btn-primary btn-cons pull-right" type="submit" name="_submit">Ingresar</button>
+            </div>
+          </div>
+		  </form>
+        </div>
+     
+    
+  </div>
+</div>
+<!-- END CONTAINER -->
+{% endblock %}
