@@ -54,7 +54,8 @@ class FechaProximaCommand extends ContainerAwareCommand
         $hace_dos_horas = $fecha_actual->sub(new \DateInterval('PT2H'));
         foreach($servicios_dias_semana as $sds)
         {   
-            $fecha_hora_servicio = new \DateTime($fecha_actual.' '.$sds->getHora());
+            $hora_format = $sds->getHora()->format('H:i');
+            $fecha_hora_servicio = new \DateTime($fecha_format.' '.$hora_format);
             $fecha = null;
             if($fecha_hora_servicio < $hace_dos_horas)
             {
