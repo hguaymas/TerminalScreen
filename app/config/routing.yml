@@ -29,7 +29,7 @@ fos_user_security_check:
     
 _homepage:
     pattern:  /
-    defaults: { _controller: TerminalAdminBundle:Default:index }
+    defaults: { _controller: TerminalFrontBundle:Default:index }
     
 _welcome:
     pattern:  /administracion/servicios/
