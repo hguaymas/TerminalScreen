@@ -1,3 +1,11 @@
+servicios_actuales_admin:
+    pattern:  /servicios_actuales_admin
+    defaults: { _controller: "TerminalAdminBundle:Servicio:serviciosActualesAdmin" }
+    
+servicios_actualizados_admin:
+    pattern:  /servicios_actualizados_admin
+    defaults: { _controller: "TerminalAdminBundle:Servicio:serviciosActualizadosAdmin" }
+    
 servicios_actualizados:
     pattern:  /servicios_actualizados
     defaults: { _controller: "TerminalAdminBundle:Servicio:serviciosActualizados" }
