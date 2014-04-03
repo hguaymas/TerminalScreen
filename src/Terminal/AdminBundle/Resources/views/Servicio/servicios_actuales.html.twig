@@ -1,0 +1,175 @@
+{% extends 'TerminalAdminBundle::admin_layout.html.twig' %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li>
+        <p>INICIO</p>
+    </li>
+    <li><a href="#" class="active">Servicios</a> </li>
+</ul>
+{% endblock %}
+
+{% block main_content %}
+<!-- BEGIN PAGE CONTAINER-->
+<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<div class="page-title"> <i class="icon-custom-left"></i>
+    <h3>Servicios <span class="semi-bold">mostrados actualmente</span></h3>    
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="pull-right">
+            <button type="button" id="actualizar_servicios" class="btn btn-info btn-cons"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refrescar servicios</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">        
+        <div class="grid simple horizontal red">
+            <div class="grid-title no-border"></div>
+            <div class="grid-body no-border">
+                <div class="page-title">     
+                    <i class="icon-custom-up"></i>
+                    <h3><span class="semi-bold">Salidas</span> / Departures</h3>
+                </div>
+                <table class="table table-bordered">                    
+                    <thead>
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Destino</th>                                                                                    
+                            <th>Hora Salida</th>                            
+                            <th>Plataforma</th>                            
+                            <th>Estado</th>                            
+                        </tr>                                                                        
+                    </thead>                    
+                    <tbody id="tabla_salidas">
+                        {% include 'TerminalAdminBundle:Servicio:tabla_servicios_admin.html.twig' with {'servicios': salidas} %}    
+                    </tbody>                    
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">        
+        <div class="grid simple horizontal green">
+            <div class="grid-title no-border"></div>
+            <div class="grid-body no-border">
+                <div class="page-title">     
+                    <i class="icon-custom-down"></i>
+                    <h3><span class="semi-bold">Arribos</span> / Arrivals</h3>
+                </div>
+                <table class="table table-striped">                    
+                    <thead>
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Procedencia</th>                                                                                    
+                            <th>Hora Llegada</th>                            
+                            <th>Plataforma</th>                            
+                            <th>Estado</th>                            
+                        </tr>                                                                        
+                    </thead>                    
+                    <tbody id="tabla_arribos">
+                        {% include 'TerminalAdminBundle:Servicio:tabla_servicios_admin.html.twig' with {'servicios': arribos} %}    
+                    </tbody>                    
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    {% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<!-- BEGIN PLUGIN CSS -->
+<link href="{{ asset('assets/plugins/jquery-datatable/css/jquery.dataTables.css') }}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('assets/plugins/boostrap-checkbox/css/bootstrap-checkbox.css') }}" rel="stylesheet" type="text/css" media="screen"/>
+<link href="{{ asset('assets/plugins/datatables-responsive/css/datatables.responsive.css') }}" rel="stylesheet" type="text/css" media="screen"/>
+<link href="{{ asset('js/bootstrap3-editable/bootstrap3-editable/css/bootstrap-editable.css') }}" rel="stylesheet">
+<!-- END PLUGIN CSS -->    
+{% endblock %}
+
+{% block footer_javascripts %}        
+    {{ parent() }}
+<!-- BEGIN PAGE LEVEL JS -->
+
+<script src="{{ asset('assets/plugins/jquery-datatable/js/jquery.dataTables.min.js') }}" type="text/javascript" ></script>
+<script src="{{ asset('assets/plugins/jquery-datatable/extra/js/TableTools.min.js') }}" type="text/javascript" ></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables-responsive/js/datatables.responsive.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables-responsive/js/lodash.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap3-editable/bootstrap3-editable/js/bootstrap-editable.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+        $(document).on("click", '#nuevo_registro', function() {            
+            document.location = '{{ path('servicio_new') }}';
+        });
+        
+        $('.confirm_delete').on('click', function(){
+            var id = $(this).prop('id');                
+            bootbox.dialog({
+                message: "Está seguro de querer eliminar el Servicio?",
+                title: "Confirmación de eliminación",
+                buttons: {
+                    cancel: {
+                        label: "Cancelar",
+                        className: "btn-default",
+                        callback: function() {                            
+                        }
+                    },
+                    delete: {
+                        label: "Eliminar",
+                        className: "btn-danger",
+                        callback: function() {
+                            $('#form_delete_'+id).submit();
+                        }
+                    }
+                }
+            });                         
+        });
+        
+        $('#actualizar_servicios').click(function() {
+                    var el = $(".grid");                    
+                    $.ajax({
+                        url: '{{path('servicios_actualizados_admin')}}',
+                        dataType: 'json',
+                        type: 'post',
+                        beforeSend: function(){                
+                            blockUI(el);
+                        },
+                        complete: function(){
+                            unblockUI(el);
+                        }
+                    })
+                            .done(function(data) {
+                                $('#tabla_salidas').html(data.salidas);
+                                $('#tabla_arribos').html(data.arribos);
+                                makeEditables();
+                            })                            
+                });
+                makeEditables();
+    });
+    function makeEditables()
+    {            
+        $('.plataforma').editable({                
+                emptytext: 'Sin asignar',
+                title: "Plataforma",
+                success: function(response, newValue) {
+                   if(response.success === false) 
+                       return response.message; //msg will be shown in editable form
+                    }           
+             });
+        $('.estado').editable({                
+                emptytext: 'Sin asignar',
+                source: {{estadosJson|raw}},
+                success: function(response, newValue) {
+                   if(response.success === false) 
+                       return response.message; //msg will be shown in editable form
+                    }           
+             });
+}
+</script>
+
+<script src="{{ asset('js/tablas.js') }}" type="text/javascript"></script>
+{% endblock %}

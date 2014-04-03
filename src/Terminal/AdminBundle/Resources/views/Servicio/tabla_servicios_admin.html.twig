@@ -1,0 +1,9 @@
+{% for entity in servicios %}
+            <tr>
+                <td>{{ entity.empresa }}</td>
+                <td>{{ entity.nombre }}</td>                            
+                <td>{% if entity.hora %}{{ entity.hora|date('H:i') }}{% endif %}</td>                            
+                <td><a href="#" data-name="Plataforma" data-pk="{{ entity.id }}" data-url="{{path('actualizar_servicio')}}" data-type="text" class="plataforma editable-click {{entity.plataforma is empty ? 'editable-empty' : ''}}" data-value="{{entity.plataforma ? entity.plataforma : ''}}"></a></td>
+                <td><a href="#" data-name="Estado" data-pk="{{ entity.id }}" data-url="{{path('actualizar_servicio')}}" data-type="select" class="estado editable-click {{entity.estado is empty ? 'editable-empty' : ''}}" data-value="{{entity.estado ? entity.estado : ''}}"></a></td>
+            </tr>
+{% endfor %}

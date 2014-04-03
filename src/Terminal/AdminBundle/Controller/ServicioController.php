@@ -275,4 +275,46 @@ class ServicioController extends Controller
         
          
     }
+    
+    public function serviciosActualizadosAdminAction(Request $request) {        
+                
+        $respuesta = array();
+        
+        $servicios = $this->getServiciosActualizados();
+        
+        $respuesta['salidas'] = $this->renderView('TerminalAdminBundle:Servicio:tabla_servicios_admin.html.twig', array(
+            'servicios' => $servicios['salidas']
+        ));
+        $respuesta['arribos'] = $this->renderView('TerminalAdminBundle:Servicio:tabla_servicios_admin.html.twig', array(
+            'servicios' => $servicios['arribos']
+        ));
+                
+        $response = new JsonResponse();
+        $response->setData($respuesta);
+        return $response;                 
+    }
+    
+    public function serviciosActualesAdminAction()
+    {              
+        $servicios = $this->getServiciosActualizados();
+                
+        return $this->render('TerminalAdminBundle:Servicio:servicios_actuales.html.twig', array(
+            'estadosJson' => Servicio::getEstadosJson(),
+            'salidas' => $servicios['salidas'],
+            'arribos' => $servicios['arribos']
+        ));
+    }
+    
+    private function getServiciosActualizados()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $fecha_hora = new \DateTime();
+        $fecha_hora_desde = $fecha_hora->sub(new \DateInterval('PT30M'));
+        $fecha_hora = new \DateTime();
+        $fecha_hora_hasta = $fecha_hora->add(new \DateInterval('PT1H'));
+        
+        $salidas = $em->getRepository('TerminalAdminBundle:Servicio')->findServiciosActuales('salida', $fecha_hora_desde, $fecha_hora_hasta);
+        $arribos = $em->getRepository('TerminalAdminBundle:Servicio')->findServiciosActuales('arribo', $fecha_hora_desde, $fecha_hora_hasta);
+        return array('salidas' => $salidas, 'arribos' => $arribos);
+    }
 }
