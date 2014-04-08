@@ -44,10 +44,7 @@
                         {{ form_label(form.provincia, 'Provincia', {'label_attr': {'class': 'form-label'}})}}
                         <div class="input-with-icon  right">
                             <i class=""></i>
-                            <div class="col-md-3">                              
-                                {{ form_widget(form.provincia,{ 'attr' : { 'class' : 'select2' }}) }}                                  
-                            </div>                        
-                            <button class="btn btn-default" type="button">Agregar provincia</button>
+                            {{ form_widget(form.provincia,{ 'attr' : { 'class' : 'select2' }}) }}                                  
                             {{ form_errors(form.provincia) }}
                         </div>
                     </div>                                        
