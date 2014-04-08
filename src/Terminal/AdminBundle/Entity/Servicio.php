@@ -219,8 +219,8 @@ class Servicio
         $this->miercoles = true;
         $this->jueves = true;
         $this->viernes = true;           
-        $this->sabado = false;           
-        $this->domingo = false;           
+        $this->sabado = true;           
+        $this->domingo = true;           
         $this->feriados = false;           
         $this->estado = 'espera';           
     }
