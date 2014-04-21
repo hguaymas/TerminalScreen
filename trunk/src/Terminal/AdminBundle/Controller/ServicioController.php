@@ -268,6 +268,7 @@ class ServicioController extends Controller
         $respuesta['arribos'] = $this->renderView('TerminalFrontBundle:Default:tabla_servicios.html.twig', array(
             'servicios' => $arribos            
         ));
+        $respuesta['fecha_hora'] = $this->renderView('TerminalFrontBundle:Default:fecha_hora.html.twig');
                 
         $response = new JsonResponse();
         $response->setData($respuesta);
