@@ -5,6 +5,9 @@
 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 <div class="page-title"> 
     <img src="{{ asset('images/logo.jpg') }}" title="Logo Terminal" alt="Logo Terminal" width="150px"/>
+    <div class="pull-right" id="fecha_hora">
+        {% include 'TerminalFrontBundle:Default:fecha_hora.html.twig' %}    
+    </div>
 </div>
 
 <div class="row">
@@ -96,6 +99,7 @@
                             .done(function(data) {
                                 $('#tabla_salidas').html(data.salidas);
                                 $('#tabla_arribos').html(data.arribos);
+                                $('#fecha_hora').html(data.fecha_hora);
                             })
                             .always(function() {
                                 setTimeout(callout, set_delay);
