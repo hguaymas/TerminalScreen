@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
             new Terminal\FrontBundle\TerminalFrontBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -3,9 +3,8 @@
 {% block main_content %}
 <!-- BEGIN PAGE CONTAINER-->
 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-<div class="page-title"> 
-    <img src="{{ asset('images/logo.jpg') }}" title="Logo Terminal" alt="Logo Terminal" width="150px"/>
-    <div class="pull-right" id="fecha_hora">
+<div class="page-title">     
+    <div id="fecha_hora">
         {% include 'TerminalFrontBundle:Default:fecha_hora.html.twig' %}    
     </div>
 </div>
@@ -17,12 +16,12 @@
             <div class="grid-body no-border">
                 <div class="page-title">     
                     <i class="icon-custom-up"></i>
-                    <h3><span class="semi-bold">Salidas</span> / Departures</h3>
+                    <h3 style="width: 90%;"><span class="semi-bold">Salidas</span> / Departures <span class="pull-right"><img src="{{ asset('images/logo.jpg') }}" title="Logo Terminal" alt="Logo Terminal" width="60px"/></span></h3>
                 </div>
-                <table class="table table-bordered">                    
+                <table class="table table-bordered table-striped">                    
                     <thead>
                         <tr>
-                            <th>Empresa</th>
+                            <th style="width: 30%;">Empresa</th>
                             <th>Destino</th>                                                                                    
                             <th>Hora Salida</th>                            
                             <th>Plataforma</th>                            
@@ -42,12 +41,12 @@
             <div class="grid-body no-border">
                 <div class="page-title">     
                     <i class="icon-custom-down"></i>
-                    <h3><span class="semi-bold">Arribos</span> / Arrivals</h3>
+                    <h3 style="width: 90%;"><span class="semi-bold">Arribos</span> / Arrivals <span class="pull-right"><img src="{{ asset('images/logo.jpg') }}" title="Logo Terminal" alt="Logo Terminal" width="60px"/></span></h3>
                 </div>
-                <table class="table table-striped">                    
+                <table class="table table-bordered table-striped">                    
                     <thead>
                         <tr>
-                            <th>Empresa</th>
+                            <th style="width: 30%;">Empresa</th>
                             <th>Procedencia</th>                                                                                    
                             <th>Hora Llegada</th>                            
                             <th>Plataforma</th>                            
@@ -62,10 +61,6 @@
         </div>
     </div>
 </div>
-
-
-
-
     {% endblock %}
 
 {% block stylesheets %}    
