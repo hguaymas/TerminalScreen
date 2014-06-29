@@ -1,9 +1,9 @@
 {% for entity in servicios %}
             <tr>
-                <td>{{ entity.empresa }}</td>
-                <td>{{ entity.nombre }}</td>                            
-                <td>{% if entity.hora %}{{ entity.hora|date('H:i') }}{% endif %}</td>                            
-                <td>{{ entity.plataforma }}</td>                            
+                <td><strong>{{ entity.empresa }}</strong></td>
+                <td><strong>{{ entity.nombre }}</strong></td>                            
+                <td><strong>{% if entity.hora %}{{ entity.hora|date('H:i') }}{% endif %}</strong></td>                            
+                <td><strong>{{ entity.plataforma }}</strong></td>                            
                 <td><span class="label {{ entity.estadoColor ? 'label-' ~ entity.estadoColor : '' }}">{{ entity.estadoTexto }}</span></td>                            
             </tr>
 {% endfor %}

@@ -3,6 +3,7 @@
 namespace Terminal\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Servicio
@@ -172,6 +173,24 @@ class Servicio
      */
     private $estado;
         
+    
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var datetime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updated;
+    
+    
     public static $dias_semana = array(
         1 => 'lunes', 
         2 => 'martes', 
@@ -816,5 +835,15 @@ class Servicio
     public function getEstadoColor()
     {        
         return self::$estados_text[$this->getEstado()]['color'];
+    }
+    
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }

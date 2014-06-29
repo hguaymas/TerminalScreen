@@ -38,7 +38,14 @@ class ServicioRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery(
-                'SELECT s FROM TerminalAdminBundle:Servicio s JOIN s.empresa e WHERE s.tipo = :tipo AND s.fechaProxima >= :fecha_desde AND s.fechaProxima <= :fecha_hasta AND (s.fechaHasta IS NULL OR s.fechaHasta >= :fecha) AND (s.feriados = 0 OR (s.feriados = 1 AND EXISTS (SELECT f.fecha FROM TerminalAdminBundle:Feriado f WHERE f.fecha = :fecha_actual))) ORDER BY s.hora, s.nombre'
+                'SELECT s FROM TerminalAdminBundle:Servicio s JOIN s.empresa e '
+                    . 'WHERE s.tipo = :tipo '
+                    . 'AND s.fechaProxima >= :fecha_desde '
+                    . 'AND s.fechaProxima <= :fecha_hasta '
+                    . 'AND (s.fechaHasta IS NULL OR s.fechaHasta >= :fecha) '
+                    . 'AND (s.feriados = 0 OR (s.feriados = 1 AND EXISTS (SELECT f.fecha FROM TerminalAdminBundle:Feriado f WHERE f.fecha = :fecha_actual))) '
+                    . 'OR (s.updated >= :fecha_desde AND s.updated  <= :fecha_hasta AND s.tipo = :tipo) '
+                    . 'ORDER BY s.hora, s.nombre'
             )
                 ->setParameter('tipo', $tipo)
                 ->setParameter('fecha', date_format( new \DateTime(), 'Y-m-d H:i'))
