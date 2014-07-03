@@ -1,7 +1,7 @@
 {% for entity in servicios %}
             <tr>
-                <td><strong>{{ entity.empresa | raw}}</strong></td>
-                <td><strong>{{ entity.nombre | raw}}</strong></td>                            
+                <td><strong>{{ entity.empresa |convert_encoding( from=ISO-8859-1, to=UTF-8) }}</strong></td>
+                <td><strong>{{ entity.nombre |convert_encoding( from=ISO-8859-1, to=UTF-8) }}</strong></td>                            
                 <td><strong>{% if entity.hora %}{{ entity.hora|date('H:i') }}{% endif %}</strong></td>                            
                 <td><strong>{{ entity.plataforma }}</strong></td>                            
                 <td><span class="label {{ entity.estadoColor ? 'label-' ~ entity.estadoColor : '' }}">{{ entity.estadoTexto }}</span></td>                            
