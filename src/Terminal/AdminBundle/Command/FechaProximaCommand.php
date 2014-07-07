@@ -39,6 +39,7 @@ class FechaProximaCommand extends ContainerAwareCommand
             $fecha_actualizada = $fecha->add(new \DateInterval('P'.$cant.'D'))->format('Y-m-d H:i');
             $sxd->setFechaProxima(new \DateTime($fecha_actualizada));
             $sxd->setEstado('espera');                                                
+            $sxd->setPlataforma($sxd->getEmpresa()->getPlataformas());                                                
             //$em->persist($sxd);            
             $output->writeln('SERVICIO: '.$sxd->getNombre().' actualizado a fecha proxima '.$sxd->getFechaProxima()->format('d/m/Y H:i'));                
         }                    
