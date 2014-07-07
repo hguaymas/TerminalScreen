@@ -169,7 +169,7 @@ class Servicio
     /**
      * @var string
      *
-     * @ORM\Column(name="estado", type="string", columnDefinition="ENUM('embarcando', 'cancelado', 'demorado', 'plataforma', 'espera', 'consultar')", nullable=true)
+     * @ORM\Column(name="estado", type="string", columnDefinition="ENUM('embarcando', 'cancelado', 'demorado', 'plataforma', 'espera', 'consultar', 'ocultar')", nullable=true)
      */
     private $estado;
         
@@ -225,7 +225,8 @@ class Servicio
         'demorado' => array('texto' => 'Demorado', 'color' => 'important'), 
         'plataforma' => array('texto' => 'En plataforma', 'color' => 'success'), 
         'espera' => array('texto' => 'En espera', 'color' => ''), 
-        'consultar' => array('texto' => 'Consultar Cía.', 'color' => 'inverse')
+        'consultar' => array('texto' => 'Consultar Cía.', 'color' => 'inverse'),
+        'ocultar' => array('texto' => 'Ocultar', 'color' => '')
         );
     public static $tipos_frecuencia = array('dias_semana' => 'Días de la semana','cada_x_dias' => 'Cada X días');
     public static $tipos_servicio = array('salida' => 'Salida', 'arribo' => 'Arribo');
