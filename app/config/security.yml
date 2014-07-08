@@ -53,7 +53,8 @@ security:
 
     access_control:        
         - { path: ^/servicios$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/administracion/usuario, role: ROLE_ADMIN }  
+        - { path: ^/administracion/usuarios/mi_cuenta, role: ROLE_USER }  
+        - { path: ^/administracion/usuarios, role: ROLE_ADMIN }  
         - { path: ^/administracion$, role: ROLE_USER }
         - { path: ^/administracion/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administracion/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
