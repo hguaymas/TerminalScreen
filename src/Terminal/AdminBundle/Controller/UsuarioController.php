@@ -52,7 +52,7 @@ class UsuarioController extends Controller
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'Se creó correctamente el Usuario');
-            return $this->redirect($this->generateUrl('usuario_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('usuario'));
         }
 
         return $this->render('TerminalAdminBundle:Usuario:new.html.twig', array(
