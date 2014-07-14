@@ -219,14 +219,13 @@ class Servicio
         'Domingo' => 'Dom',
         'Feriados' => 'Feriados'
         );
-    public static $estados_text = array(
-        'embarcando' => array('texto' => 'Embarcando', 'color' => 'info'),
+    public static $estados_text = array(        
         'cancelado' => array('texto' => 'Cancelado', 'color' => 'warning'), 
         'demorado' => array('texto' => 'Demorado', 'color' => 'important'), 
         'plataforma' => array('texto' => 'En plataforma', 'color' => 'success'), 
         'espera' => array('texto' => 'En espera', 'color' => ''), 
         'consultar' => array('texto' => 'Consultar Cía.', 'color' => 'inverse'),
-        'ocultar' => array('texto' => 'Ocultar', 'color' => '')
+        'ocultar' => array('texto' => 'Ocultar', 'color' => '') //Color: info
         );
     public static $tipos_frecuencia = array('dias_semana' => 'Días de la semana','cada_x_dias' => 'Cada X días');
     public static $tipos_servicio = array('salida' => 'Salida', 'arribo' => 'Arribo');
