@@ -257,7 +257,7 @@ class ServicioController extends Controller
         $fecha_hora = new \DateTime();
         $fecha_hora_desde = $fecha_hora->sub(new \DateInterval('PT20M'));
         $fecha_hora = new \DateTime();
-        $fecha_hora_hasta = $fecha_hora->add(new \DateInterval('PT45M'));
+        $fecha_hora_hasta = $fecha_hora->add(new \DateInterval('PT1H'));
         
         $salidas = $em->getRepository('TerminalAdminBundle:Servicio')->findServiciosActuales('salida', $fecha_hora_desde, $fecha_hora_hasta);
         $arribos = $em->getRepository('TerminalAdminBundle:Servicio')->findServiciosActuales('arribo', $fecha_hora_desde, $fecha_hora_hasta);
@@ -312,7 +312,7 @@ class ServicioController extends Controller
         $fecha_hora = new \DateTime();
         $fecha_hora_desde = $fecha_hora->sub(new \DateInterval('PT20M'));
         $fecha_hora = new \DateTime();
-        $fecha_hora_hasta = $fecha_hora->add(new \DateInterval('PT45M'));
+        $fecha_hora_hasta = $fecha_hora->add(new \DateInterval('PT1H'));
         
         $salidas = $em->getRepository('TerminalAdminBundle:Servicio')->findServiciosActuales('salida', $fecha_hora_desde, $fecha_hora_hasta);
         $arribos = $em->getRepository('TerminalAdminBundle:Servicio')->findServiciosActuales('arribo', $fecha_hora_desde, $fecha_hora_hasta);
