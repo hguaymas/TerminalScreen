@@ -1,6 +1,6 @@
 {% for entity in servicios %}
             <tr>
-                <td><strong>{{ entity.empresa }}</strong></td>
+                <td><strong>{{ entity.empresa.nombre }}</strong></td>
                 <td><strong>{{ entity.nombre }}</strong></td>                            
                 <td><strong>{% if entity.hora %}{{ entity.hora|date('H:i') }}{% endif %}</strong></td>                            
                 <td style="text-align: center;"><strong>{{ entity.plataforma ? entity.plataforma : entity.empresa.plataformas }}</strong></td>                            
