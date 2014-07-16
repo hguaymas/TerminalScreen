@@ -55,14 +55,15 @@ class ServicioRepository extends EntityRepository
                     . 'AND s.estado <> \'ocultar\' '
                     . 'OR (s.fechaProxima <= :fecha_hasta '
                     . 'AND (s.feriados = 0 OR (s.feriados = 1 AND EXISTS (SELECT fe.fecha FROM TerminalAdminBundle:Feriado fe WHERE fe.fecha = :fecha_actual))) '
-                    . 'AND (s.updated IS NULL OR s.updated  <= :fecha_hasta AND s.tipo = :tipo AND s.estado <> \'ocultar\' AND s.estado <> \'espera\'))'                    
+                    . 'AND (s.updated IS NULL OR (s.updated  <= :fecha_hasta AND s.tipo = :tipo AND s.estado <> \'ocultar\' AND s.estado <> \'espera\') OR (s.updated  <= :media_hora AND s.tipo = :tipo AND s.estado = \'plataforma\'))) '                    
                     . 'ORDER BY s.hora, s.nombre'
             )
                 ->setParameter('tipo', $tipo)
                 ->setParameter('fecha', date_format( new \DateTime(), 'Y-m-d H:i'))
                 ->setParameter('fecha_actual', date_format( new \DateTime(), 'Y-m-d'))
                 ->setParameter('fecha_desde', $fecha_desde)
-                ->setParameter('fecha_hasta', $fecha_hasta);
+                ->setParameter('fecha_hasta', $fecha_hasta)
+                ->setParameter('media_hora', date_format( new \DateTime('-30 minutes'), 'Y-m-d H:i'));
         $query->setMaxResults(10);
         return $query->getResult();        
     }
